@@ -383,18 +383,6 @@ var loadData = function () {
         });
     });
 
-
-    var reqss = $.getJSON("/apis/apps/v1beta1/namespaces/"+namespace+"/statefulsets/?labelSelector=visualize%3Dtrue", function (data) {
-        statefulsets = data;
-        if (data.items == undefined || data.items == null) {
-            data.items = [];
-        }
-            $.each(data.items, function (key, val) {
-                val.type = 'statefulset';
-                //console.log("Controller ID = " + val.metadata.name)
-            });
-    });
-
     var req3 = $.getJSON("/api/v1/namespaces/"+namespace+"/services?labelSelector=visualize%3Dtrue", function (data) {
         services = data;
         //console.log("loadData(): Services");
@@ -421,7 +409,7 @@ var loadData = function () {
         });
     });
 
-    $.when(req1, req2, reqss, req3, req4).then(function () {
+    $.when(req1, req2, req3, req4).then(function () {
         deferred.resolve();
     });
 
