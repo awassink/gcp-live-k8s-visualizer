@@ -45,7 +45,7 @@ function extractVersion(image) {
 var pods = [];
 var services = [];
 var controllers = [];
-var statefulsets = [];
+// var statefulsets = [];
 var uses = {};
 
 var groups = {};
@@ -67,7 +67,7 @@ var insertByName = function (index, value) {
 var groupByName = function () {
     $.each(pods.items, insertByName);
     $.each(controllers.items, insertByName);
-    $.each(statefulsets.items, insertByName);
+    // $.each(statefulsets.items, insertByName);
     $.each(services.items, insertByName);
 };
 
@@ -113,26 +113,26 @@ var connectControllers = function () {
             }
         }
     }
-    for (var i = 0; i < statefulsets.items.length; i++) {
-        var statefulset = statefulsets.items[i];
-        for (var j = 0; j < pods.items.length; j++) {
-            var pod = pods.items[j];
-            if (pod.metadata.labels.run == statefulset.metadata.labels.run) {
-                if (statefulset.metadata.labels.version && pod.metadata.labels.version && (statefulset.metadata.labels.version != pod.metadata.labels.version)) {
-                    continue;
-                }
-                jsPlumb.connect({
-                    source: 'controller-' + statefulset.metadata.name,
-                    target: 'pod-' + pod.metadata.name,
-                    anchors: ["Bottom", "Bottom"],
-                    paintStyle: {lineWidth: 5, strokeStyle: 'rgb(51,105,232)'},
-                    joinStyle: "round",
-                    endpointStyle: {fillStyle: 'rgb(51,105,232)', radius: 7},
-                    connector: ["Flowchart", {cornerRadius: 5}]
-                });
-            }
-        }
-    }
+    // for (var i = 0; i < statefulsets.items.length; i++) {
+    //     var statefulset = statefulsets.items[i];
+    //     for (var j = 0; j < pods.items.length; j++) {
+    //         var pod = pods.items[j];
+    //         if (pod.metadata.labels.run == statefulset.metadata.labels.run) {
+    //             if (statefulset.metadata.labels.version && pod.metadata.labels.version && (statefulset.metadata.labels.version != pod.metadata.labels.version)) {
+    //                 continue;
+    //             }
+    //             jsPlumb.connect({
+    //                 source: 'controller-' + statefulset.metadata.name,
+    //                 target: 'pod-' + pod.metadata.name,
+    //                 anchors: ["Bottom", "Bottom"],
+    //                 paintStyle: {lineWidth: 5, strokeStyle: 'rgb(51,105,232)'},
+    //                 joinStyle: "round",
+    //                 endpointStyle: {fillStyle: 'rgb(51,105,232)', radius: 7},
+    //                 connector: ["Flowchart", {cornerRadius: 5}]
+    //             });
+    //         }
+    //     }
+    // }
     for (var i = 0; i < services.items.length; i++) {
         var service = services.items[i];
         //            if (service.metadata.name == 'kubernetes' || service.metadata.name == 'skydns' || service.metadata.name == 'kubernetes-ro') { continue; }
@@ -421,7 +421,7 @@ function refresh(instance) {
     pods = [];
     services = [];
     controllers = [];
-    statefulsets = [];
+    // statefulsets = [];
     nodes = [];
     uses = {};
     groups = {};
