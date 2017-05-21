@@ -421,6 +421,7 @@ function refresh(instance) {
     pods = [];
     services = [];
     controllers = [];
+    statefulsets = [];
     nodes = [];
     uses = {};
     groups = {};
